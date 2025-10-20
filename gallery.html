@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Фотогалерея — Кимов Тембот Эльмурзович</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const photos = document.querySelectorAll('.photo');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const year = btn.getAttribute('data-year');
+        photos.forEach(p => {
+          p.style.display = (year === 'all' || p.classList.contains(year)) ? 'block' : 'none';
+        });
+      });
+    });
+    const lightbox = document.getElementById('lightbox');
+    const lightImg = document.getElementById('light-img');
+    photos.forEach(photo => {
+      photo.addEventListener('click', () => {
+        lightImg.src = photo.src;
+        lightbox.style.display = 'flex';
+      });
+    });
+    lightbox.addEventListener('click', () => lightbox.style.display = 'none');
+  });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Фотоархив по годам</h1>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="bio.html">Биография</a>
+        <a href="gallery.html">Фотогалерея</a>
+        <a href="guestbook.html">Книга памяти</a>
+      </nav>
+    </header>
+
+    <section class="card">
+      <div class="filter-bar">
+        <button class="filter-btn" data-year="all">Все</button>
+        <button class="filter-btn" data-year="1939">1939</button>
+        <button class="filter-btn" data-year="1940">1940</button>
+        <button class="filter-btn" data-year="1941">1941</button>
+        <button class="filter-btn" data-year="1945">1945</button>
+        <button class="filter-btn" data-year="1950">1950</button>
+        <button class="filter-btn" data-year="1960">1960</button>
+        <button class="filter-btn" data-year="1970">1970</button>
+      </div>
+
+      <div class="gallery-grid">
+        <img src="assets/sample_1939.jpg" alt="Фото 1939 года" class="photo 1939">
+        <img src="assets/sample_1941.jpg" alt="Фото 1941 года" class="photo 1941">
+        <img src="assets/sample_1950.jpg" alt="Фото 1950 года" class="photo 1950">
+      </div>
+    </section>
+
+    <div id="lightbox" class="lightbox">
+      <img id="light-img" src="" alt="">
+    </div>
+
+    <footer class="footer">
+      <div>© Семья Кимовых. Мемориальный фотоархив</div>
+    </footer>
+  </div>
+</body>
+</html>
